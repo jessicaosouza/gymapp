@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:gymapp/_core/app_colors.dart";
 import "package:gymapp/models/exercise_model.dart";
 import "package:gymapp/models/feeling_model.dart";
 
@@ -29,7 +30,28 @@ class ExerciseSession extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.blue,
         appBar: AppBar(
-          title: Text("${exerciseModel.name} -${exerciseModel.train}"),
+          title: Column(
+            children: [
+              Text(
+                exerciseModel.name,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              ),
+              Text(
+                exerciseModel.train,
+                style: const TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: AppColors.darkBlue,
+          elevation: 0,
+          toolbarHeight: 72,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(32),
+            ),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -48,9 +70,18 @@ class ExerciseSession extends StatelessWidget {
             children: [
               SizedBox(
                 height: 250,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Enviar foto"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Enviar foto"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Tirar foto"),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -81,7 +112,21 @@ class ExerciseSession extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(feelingsList.length, (index) {
                   FeelingModel feeling = feelingsList[index];
-                  return Text(feeling.feeling);
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(feeling.feeling),
+                    subtitle: Text(feeling.date),
+                    leading: const Icon(Icons.double_arrow_outlined),
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        print("DELETAR ${feeling.feeling}");
+                      },
+                    ),
+                  );
                 }),
               )
             ],
