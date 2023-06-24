@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:gymapp/_core/app_colors.dart";
+import "package:gymapp/components/decoration_auth_inputs.dart";
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -54,30 +55,26 @@ class _AuthScreenState extends State<AuthScreen> {
                         height: 32,
                       ),
                       TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("E-mail"),
-                        ),
+                        decoration: getAuthInputDecoration("E-mail"),
                       ),
+                      const SizedBox(height: 8),
                       TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("Senha"),
-                        ),
+                        decoration: getAuthInputDecoration("Senha"),
                         obscureText: true,
                       ),
+                      const SizedBox(height: 8),
                       Visibility(
                         visible: !wantLogin,
                         child: Column(
                           children: [
                             TextFormField(
-                              decoration: const InputDecoration(
-                                label: Text("Confirme Senha"),
-                              ),
+                              decoration:
+                                  getAuthInputDecoration("Confirmar Senha"),
                               obscureText: true,
                             ),
+                            const SizedBox(height: 8),
                             TextFormField(
-                              decoration: const InputDecoration(
-                                label: Text("Nome"),
-                              ),
+                              decoration: getAuthInputDecoration("Nome"),
                             ),
                           ],
                         ),
